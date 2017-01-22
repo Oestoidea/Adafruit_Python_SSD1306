@@ -12,31 +12,31 @@ Access point (AP) on Raspberry Pi 3 (RPi) with OLED display (SSD1306 128x64 I2C 
 
 ## AP
 
-1. Install [Raspbian Jessie Lite](https://www.raspberrypi.org/downloads/raspbian/) on microSD card using Win32DiskImager utility.
+1\. Install [Raspbian Jessie Lite](https://www.raspberrypi.org/downloads/raspbian/) on microSD card using Win32DiskImager utility.
 
-2. Make a file-semaphore 'ssh' into root directory.
+2\. Make a file-semaphore 'ssh' into root directory.
 
-3. Plug RPi to your router and use ipscan24 utility for search the board IP.
+3\. Plug RPi to your router and use ipscan24 utility for search the board IP.
 
-4. Use with Putty utility to connect RPi by SSH with default login and password:
+4\. Use with Putty utility to connect RPi by SSH with default login and password:
 
 ```
 putty.exe pi@<RPi IP> -pw raspberry
 ```
 
-5. Change default password:
+5\. Change default password:
 
 ```
 sudo passwd pi
 ```
 
-6. Update software:
+6\. Update software:
 
 ```
 sudo apt-get update && sudo apt-get upgrade
 ```
 
-7. Configure network interfaces:
+7\. Configure network interfaces:
 
 ```
 sudo nano /etc/network/interfaces
@@ -67,13 +67,13 @@ broadcast 255.0.0.0
 
 To save changers use Ctrl+O and to exit — Ctrl+X.
 
-8. Install dnsmasq:
+8\. Install dnsmasq:
 
 ```
 sudo apt-get install dnsmasq
 ```
 
-9. Configure DNS:
+9\. Configure DNS:
 
 ```
 sudo nano /etc/dnsmasq.conf
@@ -98,7 +98,7 @@ log-facility=/var/log/dnsmasq.log
 log-queries
 ```
 
-10. Enable packet forwarding:
+10\. Enable packet forwarding:
 
 ```
 sudo nano /etc/sysctl.conf
@@ -111,7 +111,7 @@ net.ipv4.ip_forward=1
 net.ipv6.conf.all.forwarding=1
 ```
 
-11. Configure a NAT between our wlan0 interface and our eth0 interface:
+11\. Configure a NAT between our wlan0 interface and our eth0 interface:
 
 ```
 sudo nano /etc/rc.local
@@ -128,13 +128,13 @@ iptables -A FORWARD -i $DEST -o $SOURCE -j ACCEPT
 exit 0
 ```
 
-12. Install hostapd:
+12\. Install hostapd:
 
 ```
 sudo apt-get install hostapd
 ```
 
-13. Add config for use Wi-Fi card as an AP:
+13\. Add config for use Wi-Fi card as an AP:
 
 ```
 sudo nano /etc/default/hostapd
@@ -146,7 +146,7 @@ And add lines into the file:
 DAEMON_CONF="/etc/hostapd/hostapd.conf"
 ```
 
-14. Configure AP:
+14\. Configure AP:
 
 ```
 sudo nano /etc/hostapd/hostapd.conf
@@ -187,19 +187,26 @@ wpa_passphrase=raspberry
 rsn_pairwise=CCMP
 ```
 
-15. Reboot OS:
+15\. Reboot OS:
 
 ```
 sudo reboot
 ```
 
-16. Find a new Pi3-AP and connect to it.
+16\. Find a new Pi3-AP and connect to it.
 
 ## OLEDs
 
-1. Connect OLED's to Raspberry Pi as shown on the picture.
+1\. Connect OLED's to Raspberry Pi as shown on the picture.
 
 ![RPi_oleds_scheme](./pics/RPi_oleds_ssd1306_bb.png)
+
+| RPi         | I2C OLED      |
+| ----------- | ------------- |
+| GPIO3 (5)   | SCK           |
+| GPIO2 (3)   | SDA           |
+| 3V3 (1)     | VCC           |
+| GND (6)     | GND           |
 
 | RPi         | SPI OLED      |
 | ----------- | ------------- |
@@ -211,14 +218,7 @@ sudo reboot
 | 3V3 (17)    | VCC           |
 | GND (20)    | GND           |
 
-| RPi         | I2C OLED      |
-| ----------- | ------------- |
-| GPIO3 (5)   | SCK           |
-| GPIO2 (3)   | SDA           |
-| 3V3 (1)     | VCC           |
-| GND (6)     | GND           |
-
-2. Anable hardware SPI or/and I2C
+2\. Anable hardware SPI or/and I2C
 
 ```
 sudo raspi-config
@@ -226,20 +226,20 @@ sudo raspi-config
 
 Choose menu "5 Interfacing Options " and submenu "P4 SPI" or/and "P5 I2C". And finish configuration utility.
 
-3. Install packages for Python 3:
+3\. Install packages for Python 3:
 
 ```
 sudo apt-get install build-essential python-dev python-pip python-imaging python-smbus git
 sudo apt-get install python3-pip python3-dev
 ```
 
-4. Install install the RPi.GPIO library:
+4\. Install install the RPi.GPIO library:
 
 ```
 sudo pip3 install RPi.GPIO
 ```
 
-5. Download and compile the JPEG library:
+5\. Download and compile the JPEG library:
 
 ```
 wget http://www.ijg.org/files/jpegsrc.v8c.tar.gz    
@@ -251,7 +251,7 @@ sudo make install
 cd ..
 ```
 
-6. Link the libraries correctly:
+6\. Link the libraries correctly:
 
 ```
 sudo ln -s /usr/lib/arm-linux-gnueabi/libjpeg.so /usr/lib
@@ -259,26 +259,26 @@ sudo ln -s /usr/lib/arm-linux-gnueabi/libfreetype.so /usr/lib
 sudo ln -s /usr/lib/arm-linux-gnueabi/libz.so /usr/lib
 ```
 
-7. Install rest of the libraries, as well as freetrype and zlib:
+7\. Install rest of the libraries, as well as freetrype and zlib:
 
 ```
 sudo apt-get install libjpeg-dev libfreetype6 libfreetype6-dev zlib1g-dev
 ```
 
-8. Install Python libraries for work with images and for retrieving information on running processes and system utilization:
+8\. Install Python libraries for work with images and for retrieving information on running processes and system utilization:
 
 ```
 sudo pip3 install image
 sudo pip3 install psutil
 ```
 
-9. Inslall fonts:
+9\. Inslall fonts:
 
 ```
 sudo apt-get install fontconfig
 ```
 
-10. Clone library from Github for collecting system information and showing it on OLED, and install it:
+10\. Clone library from Github for collecting system information and showing it on OLED, and install it:
 
 ```
 git clone https://github.com/Oestoidea/Adafruit_Python_SSD1306.git
@@ -286,7 +286,7 @@ cd Adafruit_Python_SSD1306/
 sudo python3 setup.py install
 ```
 
-11. Run example for your connection (I2C or SPI):
+11\. Run example for your connection (I2C or SPI):
 
 ```
 sudo python3 examples/statisticsI2C.py
@@ -309,7 +309,7 @@ If all have done correctly you can see logs like:
 
 And information on the screen.
 
-12. Configure script autorun:
+12\. Configure script autorun:
 
 ```
 sudo nano /etc/rc.local
@@ -325,6 +325,12 @@ Or for SPI display:
 
 ```
 python3 /home/pi/Adafruit_Python_SSD1306/examples/statisticsSPI.py
+```
+
+13\. Reboot OS:
+
+```
+sudo reboot
 ```
 
 # Authors
