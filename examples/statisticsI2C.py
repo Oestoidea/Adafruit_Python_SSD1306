@@ -186,7 +186,7 @@ while True:
   def get_ssid():
     try:
       id = os.popen("iw wlan0 info | grep ssid")
-      ssid = str(re.findall(r'\s\w+$', str(id.read()).rstrip('\r\n'))[0])
+      ssid = str(re.findall(r'\S+$', str(id.read()).rstrip('\r\n'))[0])
     except IndexError:
       logging.info(u'SSID')
       ssid = ' N/С'
@@ -210,7 +210,7 @@ while True:
       word_count = 0
       suffix = ''
 
-    return "SSID:%s %d client%s" % (ssid, word_count, suffix)
+    return "SSID: %s %d client%s" % (ssid, word_count, suffix)
 
   get_ssid = get_ssid()
   draw.text((pad, top), get_ssid, font = font, fill = 255)
