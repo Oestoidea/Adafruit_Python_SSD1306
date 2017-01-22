@@ -23,7 +23,7 @@ logger_path = sys.path[0] + '/log_shapes.log'
 logging.basicConfig(format = u'%(levelname)-8s [%(asctime)s] %(message)s', level = logging.INFO, filename = logger_path)
 
 # Raspberry Pi pin configuration:
-RST = 24
+RST = 25
 # Note the following are only used with SPI:
 DC = 9
 SPI_PORT = 0
