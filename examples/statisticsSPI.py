@@ -132,59 +132,6 @@ while True:
   draw.text((pad, top), cpu_temp, font = font, fill = 255)
   
   top += row
-
-  # get external IP, ping delay to 8.8.8.8
-  def get_wandata():
-    try:
-      ifconf = os.popen('ifconfig eth0 | grep "inet\ addr" | cut -f12 -d " " | cut -c 6-')
-      wan_ip = str(ifconf.read()).rstrip(' \r\n')
-    except Exception:
-      logging.info(u'wan_ip')
-      wan_ip = 'N/С'
-
-    try:
-      external = os.popen('ping 8.8.8.8 -c 1 | grep "time=" | cut -f7 -d " " | cut -c 6-')
-      ping = str(external.read()).rstrip(' \r\n')
-    except IndexError:
-      logging.info(u'ping')
-      ping = 'N/С'
-        
-    return "%s %sms" % (wan_ip, ping)
-
-  get_wandata = get_wandata()
-  draw.text((pad, top), get_wandata, font = font, fill = 255)
-  
-  top += row
-
-  # get gate`s IP, channel and dBm
-  def get_apdata():
-    try:
-      ifconf = os.popen('ifconfig wlan0 | grep "inet\ addr" | cut -f12 -d " " | cut -c 6-')
-      wlan_ip = str(ifconf.read()).rstrip(' \r\n')
-    except Exception:
-      logging.info(u'wlan_ip')
-      wlan_ip = 'N/С'
-    
-    try:
-      channel = os.popen("cat /etc/hostapd/hostapd.conf | grep channel=")
-      ch = re.findall(r'\d+$', str(channel.read()).rstrip('\r\n'))[0]
-    except IndexError:
-      logging.info(u'ch')
-      ch = 'N/С'
-    
-    try:
-      level = os.popen("iwconfig wlan0 | grep Tx-Power")
-      dbm = re.findall(r'=\d+\sdBm', str(level.read()).rstrip('\r\n'))[0].lstrip('=').rstrip(' dBm')
-    except IndexError:
-      logging.info(u'dbm')
-      dbm = 'N/С'
-        
-    return "%s %sch %sdBm" % (wlan_ip, ch, dbm)
-  
-  get_apdata = get_apdata()
-  draw.text((pad, top), get_apdata, font = font, fill = 255)
-  
-  top += row
   
   # get SSID and number of clients
   def get_ssid():
@@ -218,10 +165,66 @@ while True:
 
   get_ssid = get_ssid()
   draw.text((pad, top), get_ssid, font = font, fill = 255)
-
-  print('%2.f %.2f | %s | %s | %s | %s | %s | %s' % (times, time.time(), get_uptime, mem_usage, cpu_temp, get_wandata, get_apdata, get_ssid))
   
-  if times >= 60: # one time on about one minute
+  top += row
+
+  # get gate`s IP, channel and dBm
+  def get_apdata():
+    try:
+      ifconf = os.popen('ifconfig wlan0 | grep "inet\ addr" | cut -f12 -d " " | cut -c 6-')
+      wlan_ip = str(ifconf.read()).rstrip(' \r\n')
+    except Exception:
+      logging.info(u'wlan_ip')
+      wlan_ip = 'N/С'
+    
+    try:
+      channel = os.popen("cat /etc/hostapd/hostapd.conf | grep channel=")
+      ch = re.findall(r'\d+$', str(channel.read()).rstrip('\r\n'))[0]
+    except IndexError:
+      logging.info(u'ch')
+      ch = 'N/С'
+    
+    try:
+      level = os.popen("iwconfig wlan0 | grep Tx-Power")
+      dbm = re.findall(r'=\d+\sdBm', str(level.read()).rstrip('\r\n'))[0].lstrip('=').rstrip(' dBm')
+    except IndexError:
+      logging.info(u'dbm')
+      dbm = 'N/С'
+        
+    return "%s %sch %sdBm" % (wlan_ip, ch, dbm)
+  
+  get_apdata = get_apdata()
+  draw.text((pad, top), get_apdata, font = font, fill = 255)
+  
+  top += row
+
+  # get external IP, ping delay to 8.8.8.8
+  def get_wandata():
+    try:
+      ifconf = os.popen('ifconfig eth0 | grep "inet\ addr" | cut -f12 -d " " | cut -c 6-')
+      wan_ip = str(ifconf.read()).rstrip(' \r\n')
+    except Exception:
+      logging.info(u'wan_ip')
+      wan_ip = 'N/С'
+
+    try:
+      external = os.popen('ping 8.8.8.8 -c 1 | grep "time=" | cut -f7 -d " " | cut -c 6-')
+      ping = str(external.read()).rstrip(' \r\n')
+    except IndexError:
+      logging.info(u'ping')
+      ping = 'N/С'
+    
+    if ping != '':
+      return "%s %sms" % (wan_ip, ping)
+    else:
+      return "%s" % (wan_ip)
+
+  get_wandata = get_wandata()
+  draw.text((pad, top), get_wandata, font = font, fill = 255)
+  
+  print('%3.f %.2f | %s | %s | %s | %s | %s | %s' % (times, time.time(), get_uptime, mem_usage, cpu_temp, get_wandata, get_apdata, get_ssid))
+  
+  if times >= 200: # one time on about five minutes
     times = 0
     disp.begin() # to avoid the screen freezes
 
