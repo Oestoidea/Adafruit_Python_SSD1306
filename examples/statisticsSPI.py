@@ -25,7 +25,7 @@ logging.basicConfig(format = u'%(levelname)-8s [%(asctime)s] %(message)s', level
 # Raspberry Pi pin configuration:
 RST = 24
 # Note the following are only used with SPI:
-DC = 23
+DC = 9
 SPI_PORT = 0
 SPI_DEVICE = 0
 
