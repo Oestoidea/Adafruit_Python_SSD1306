@@ -8,11 +8,11 @@ Access point (AP) on Raspberry Pi 3 (RPi) with OLED display (SSD1306 128x64 I2C 
 2. OLED 0.96" 128×64 I2C SSD1306
 3. OLED 0.96" 128×64 SPI SSD1306
 
-![RPi_2oledss_ssd1306_photo](./pics/RPi_2oleds_ssd1306.png)
+![RPi_oleds_photo](./pics/RPi_oleds_ssd1306.png)
 
 ## AP
 
-1. Install Raspbian Jessie Lite on microSD card using Win32DiskImager utility.
+1. Install [Raspbian Jessie Lite](https://www.raspberrypi.org/downloads/raspbian/) on microSD card using Win32DiskImager utility.
 
 2. Make a file-semaphore 'ssh' into root directory.
 
@@ -199,7 +199,7 @@ sudo reboot
 
 1. Connect OLED's to Raspberry Pi as shown on the picture.
 
-![RPi_2oledss_ssd1306_scheme](./pics/RPi_2oleds_ssd1306_bb.png)
+![RPi_oleds_scheme](./pics/RPi_oleds_ssd1306_bb.png)
 
 | RPi         | SPI OLED      |
 | ----------- | ------------- |
