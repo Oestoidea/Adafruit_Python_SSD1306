@@ -222,7 +222,7 @@ while True:
   get_wandata = get_wandata()
   draw.text((pad, top), get_wandata, font = font, fill = 255)
   
-  print('%3.f %.2f | %s | %s | %s | %s | %s | %s' % (times, time.time(), get_uptime, mem_usage, cpu_temp, get_wandata, get_apdata, get_ssid))
+  print('%3.f %.2f | %s | %s | %s | %s | %s | %s' % (times, time.time(), get_uptime, mem_usage, cpu_temp, get_ssid, get_apdata, get_wandata))
   
   if times >= 200: # one time on about five minutes
     times = 0
