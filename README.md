@@ -234,7 +234,7 @@ sudo apt-get install build-essential python-dev python-pip python-imaging python
 sudo apt-get install python3-pip python3-dev
 ```
 
-4\. Install install the RPi.GPIO library:
+4\. Install the RPi.GPIO library:
 
 ```
 sudo pip3 install RPi.GPIO
@@ -316,7 +316,7 @@ And information on the screen.
 sudo nano /etc/rc.local
 ```
 
-Add line at the and of the file (before "exit 0" line) for I2C display:
+Add line at the end of the file (before "exit 0" line) for I2C display:
 
 ```
 python3 /home/pi/Adafruit_Python_SSD1306/examples/statisticsI2C.py
