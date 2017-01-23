@@ -5,8 +5,9 @@ Access point (AP) on Raspberry Pi 3 (RPi) with OLED display (SSD1306 128x64 I2C 
 ## Equipment
 
 1. Raspberry Pi 3 (OS Raspbian Jessie Lite)
-2. OLED 0.96" 128×64 I2C SSD1306
-3. OLED 0.96" 128×64 SPI SSD1306
+2. OLED 0.96" 128×64 I2C or SPI SSD1306
+3. Acrylic clear case for Raspberry Pi 2 or 3
+4. 5V and 2A power supply
 
 ![RPi_oleds_photo](./pics/RPi_oleds_ssd1306.png)
 
