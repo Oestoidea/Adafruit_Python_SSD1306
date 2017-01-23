@@ -336,7 +336,9 @@ sudo reboot
 
 # Authors
 
-Tony DiCola
+[Tony DiCola](https://github.com/adafruit/Adafruit_Python_SSD1306)
+
+[Phil Martin](https://webcache.googleusercontent.com/search?q=cache:8nfWTN8xUhwJ:https://frillip.com/using-your-raspberry-pi-3-as-a-wifi-access-point-with-hostapd/+&cd=1&hl=ru&ct=clnk&gl=ua)
 
 Vladimir Sokolov aka Oestoidea
 
