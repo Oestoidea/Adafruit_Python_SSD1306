@@ -1,4 +1,4 @@
-# Access point on Raspberry Pi 3 with parameter display
+# Access Point on Raspberry Pi 3 with Parameter Display
 
 Access point (AP) on Raspberry Pi 3 (RPi) with OLED display (SSD1306 128x64 I2C or SPI).
 
