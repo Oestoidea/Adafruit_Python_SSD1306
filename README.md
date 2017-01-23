@@ -219,7 +219,7 @@ sudo reboot
 | 3V3 (17)    | VCC           |
 | GND (20)    | GND           |
 
-2\. Anable hardware SPI or/and I2C
+2\. Enable hardware SPI or/and I2C
 
 ```
 sudo raspi-config
@@ -273,7 +273,7 @@ sudo pip3 install image
 sudo pip3 install psutil
 ```
 
-9\. Inslall fonts:
+9\. Install fonts:
 
 ```
 sudo apt-get install fontconfig
