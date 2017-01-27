@@ -219,7 +219,7 @@ sudo reboot
 | 3V3 (17)    | VCC           |
 | GND (20)    | GND           |
 
-2\. Enable hardware SPI or/and I2C
+2\. Enable hardware SPI or/and I2C:
 
 ```
 sudo raspi-config
