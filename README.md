@@ -215,7 +215,7 @@ sudo reboot
 | GPIO9 (21)  | D/C           |
 | GPIO10 (19) | DIN (SDA)     |
 | GPIO8 (24)  | CS            |
-| GPIO11 (23) | CLK           |
+| GPIO11 (23) | CLK (SCK)     |
 | 3V3 (17)    | VCC           |
 | GND (20)    | GND           |
 
