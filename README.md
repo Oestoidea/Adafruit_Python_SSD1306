@@ -17,7 +17,7 @@ An access point (AP) on Raspberry Pi 3 (RPi) with OLED display (SSD1306 128x64 I
 
 2\. Make a file-semaphore 'ssh' into root directory.
 
-3\. Plug RPi to your router and use ipscan24 utility for search the board IP.
+3\. Plug RPi to your router and use ipscan25 utility for search the board IP.
 
 4\. Use with Putty utility to connect RPi by SSH with default login and password:
 
