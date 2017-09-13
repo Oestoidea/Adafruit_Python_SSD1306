@@ -66,6 +66,16 @@ netmask 255.255.255.0
 broadcast 255.0.0.0
 ```
 
+If you have a static address from ISP then change the internal interface settings to:
+
+```
+auto eth0
+iface eth0 inet static
+address <static IP>/24
+gateway <gateway IP>
+dns-nameservers 8.8.8.8 8.8.4.4
+```
+
 To save changers use Ctrl+O and to exit — Ctrl+X.
 
 8\. Install dnsmasq:
