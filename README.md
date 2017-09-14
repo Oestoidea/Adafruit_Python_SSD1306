@@ -35,7 +35,7 @@ Then you can choose type of installation: manual or automatic.
 
 ### Automatic Access Point Installation
 
-6\. Place ![setupAP.sh](./setupAP.sh) script into root directory on flash card (the same as for 'ssh').
+6\. Place ![setupAP.sh](./setupAP.sh) script on flash card into root directory (the same as for 'ssh').
 
 7\. Move the script to the home directory:
 
