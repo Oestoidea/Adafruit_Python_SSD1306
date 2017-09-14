@@ -11,11 +11,11 @@ An access point (AP) on Raspberry Pi 3 (RPi) with OLED display (SSD1306 128x64 I
 
 ![RPi_oleds_photo](./pics/RPi_oleds_ssd1306.png)
 
-## AP
+## Access Point
 
 1\. Install [Raspbian Jessie Lite](https://www.raspberrypi.org/downloads/raspbian/) on microSD card using Win32DiskImager utility.
 
-2\. Make a file-semaphore 'ssh' into root directory.
+2\. Make a file-semaphore 'ssh' into root directory on flash card.
 
 3\. Plug RPi to your router and use ipscan25 utility for search the board IP.
 
@@ -30,6 +30,32 @@ putty.exe pi@<RPi IP> -pw raspberry
 ```
 sudo passwd pi
 ```
+
+Then you can choose type of installation: manual or automatic.
+
+### Automatic Access Point Installation
+
+6\. Place setupAP.sh script into root directory on flash card (the same as for 'ssh').
+
+7\. Move the script to the home directory:
+
+```
+sudo mv /boot/setupAP.sh .
+```
+
+8\. Run installation and wait:
+
+```
+sudo ./setupAP.sh
+```
+
+9\. If the script don't want to start, make it exacutible and try one more time:
+
+```
+sudo chmod +x setupAP.sh
+```
+
+### Manual Access Point Installation
 
 6\. Update software:
 
@@ -49,13 +75,6 @@ And add lines into the file:
 auto lo
 iface lo inet loopback
 
-auto eth0
-allow-hotplug eth0
-iface eth0 inet manual
-
-auto wlan1
-allow-hotplug wlan1
-iface wlan1 inet manual
 wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 
 allow-hotplug wlan0
@@ -64,12 +83,17 @@ address 10.0.0.1
 network 10.0.0.0
 netmask 255.255.255.0
 broadcast 255.0.0.0
+
+auto eth0
+allow-hotplug eth0
+iface eth0 inet manual
 ```
 
 If you have a static address from ISP then change the internal interface settings to:
 
 ```
 auto eth0
+allow-hotplug eth0
 iface eth0 inet static
 address <static IP>/24
 gateway <gateway IP>
@@ -97,7 +121,6 @@ And add lines into the file:
 no-resolv
 # Interface to bind to
 interface=wlan0
-# except-interface=wlan1
 except-interface=eth0
 # Specify starting_range,end_range,lease_time
 #address=/#/10.0.0.1
@@ -131,6 +154,7 @@ sudo nano /etc/rc.local
 And add lines into the file:
 
 ```
+#!/bin/sh -e
 SOURCE=eth0
 DEST=wlan0
 iptables -t nat -A POSTROUTING -o $SOURCE -j MASQUERADE
